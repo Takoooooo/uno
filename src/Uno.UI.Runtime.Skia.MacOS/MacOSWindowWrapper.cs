@@ -12,14 +12,14 @@ internal class MacOSWindowWrapper : NativeWindowWrapperBase
 {
 	private readonly MacOSWindowNative _window;
 
-	public MacOSWindowWrapper(MacOSWindowNative window, XamlRoot xamlRoot) : base(xamlRoot)
+	public MacOSWindowWrapper(MacOSWindowNative nativeWindow, Window window, XamlRoot xamlRoot) : base(window, xamlRoot)
 	{
-		_window = window;
+		_window = nativeWindow;
 
-		window.Host.SizeChanged += OnHostSizeChanged;
-		window.Host.Closing += OnWindowClosing;
-		window.Host.Closed += OnWindowClosed;
-		window.Host.RasterizationScaleChanged += Host_RasterizationScaleChanged;
+		nativeWindow.Host.SizeChanged += OnHostSizeChanged;
+		nativeWindow.Host.Closing += OnWindowClosing;
+		nativeWindow.Host.Closed += OnWindowClosed;
+		nativeWindow.Host.RasterizationScaleChanged += Host_RasterizationScaleChanged;
 
 		RasterizationScale = (float)_window.Host.RasterizationScale;
 	}
