@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
+using Windows.Globalization;
 
 namespace Uno.UI.RuntimeTests.Tests
 {
@@ -130,7 +131,7 @@ namespace Uno.UI.RuntimeTests.Tests
 
 			foreach (var language in languages)
 			{
-				CultureInfo.CurrentUICulture = new CultureInfo(language);
+				ApplicationLanguages.PrimaryLanguageOverride = language;
 				Assert.AreEqual($@"Text in '{language}'", SUT.GetString("Given_ResourceLoader/When_LocalizedResource"));
 			}
 		}
@@ -140,7 +141,7 @@ namespace Uno.UI.RuntimeTests.Tests
 		{
 			var SUT = ResourceLoader.GetForViewIndependentUse();
 
-			CultureInfo.CurrentUICulture = new CultureInfo("fr-FR");
+			ApplicationLanguages.PrimaryLanguageOverride = "fr-FR";
 			Assert.AreEqual(@"Text in 'fr'", SUT.GetString("Given_ResourceLoader/When_LocalizedResource"));
 		}
 
@@ -149,7 +150,7 @@ namespace Uno.UI.RuntimeTests.Tests
 		{
 			var SUT = ResourceLoader.GetForViewIndependentUse();
 
-			CultureInfo.CurrentUICulture = new CultureInfo("es");
+			ApplicationLanguages.PrimaryLanguageOverride = "es";
 			Assert.AreEqual(@"Text in 'es-MX'", SUT.GetString("Given_ResourceLoader/When_LocalizedResource"));
 		}
 
@@ -158,7 +159,7 @@ namespace Uno.UI.RuntimeTests.Tests
 		{
 			var SUT = ResourceLoader.GetForViewIndependentUse();
 
-			CultureInfo.CurrentUICulture = new CultureInfo("de-DE");
+			ApplicationLanguages.PrimaryLanguageOverride = "de-DE";
 			Assert.AreEqual(@"Text in 'en-US'", SUT.GetString("Given_ResourceLoader/When_LocalizedResource"));
 		}
 
